@@ -10,7 +10,7 @@ public class AddressBooksystem {
     static Scanner scanner = new Scanner(System.in);
     static HashMap<String, ArrayList<Contacts>> hashmap = new HashMap<>();
     /*Execution Of Program Starts from here*/
-    public static void AddressBook(AddressBooksystem addressBooksystem) {
+    public static void AddressBook(AddressBooksystem addressBooksystem) throws IOException {
         System.out.println("choice");
         int choice;
         do {
@@ -50,11 +50,15 @@ public class AddressBooksystem {
                     FileOperations.CSVWriters();
                     FileOperations.CSVReaders();
                     break;
+                case 7:
+                    FileOperations.JsonWriter();
+                    FileOperations.JsonReader();
+                    break;
                 default:
                     System.out.println("Wrong Choice Entered");
                     break;
             }
-        }while (choice<7);
+        }while (choice<8);
     }
     /*----Method For Search Contact in Multiple address Books those who are belongs to Same City----*/
     public static void SearchInMultipleBook(String name){

@@ -1,5 +1,8 @@
 package com.bridgelabz;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
@@ -8,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
+
+import static java.lang.System.out;
 
 public class FileOperations {
     /*-----Methods For Text File Operations-----*/
@@ -30,13 +35,14 @@ public class FileOperations {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String st;
             while ((st = reader.readLine()) != null) {
-                System.out.println(st);
+                out.println(st);
             }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
     /*-----Methods For CSV File Operations-----*/
+    //Method for CSV File Writer
     public static void CSVWriters() {
         String Data = "//home//hp//IdeaProjects//AddressBookSystemFileHandling//src//Data.csv";
             try (Writer writer = Files.newBufferedWriter(Paths.get(Data));
@@ -51,9 +57,10 @@ public class FileOperations {
                     }
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                out.println(e);
             }
         }
+        //Method to Read Data From CSV File
     public static void CSVReaders(){
         String Data = "//home//hp//IdeaProjects//AddressBookSystemFileHandling//src//Data.csv";
         try (
@@ -62,18 +69,47 @@ public class FileOperations {
         ) {
             String nextRecord[];
             while ((nextRecord = csvReader.readNext()) != null) {
-                System.out.println("First Name :" + nextRecord[0]);
-                System.out.println("Last Name :" + nextRecord[1]);
-                System.out.println("Address :" + nextRecord[2]);
-                System.out.println("City :" + nextRecord[3]);
-                System.out.println("Contact No :" + nextRecord[4]);
-                System.out.println("Mail-id :" + nextRecord[5]);
-                System.out.println("State :" + nextRecord[6]);
-                System.out.println("Zip Code :" + nextRecord[7]);
-                System.out.println("=============================");
+                out.println("First Name :" + nextRecord[0]);
+                out.println("Last Name :" + nextRecord[1]);
+                out.println("Address :" + nextRecord[2]);
+                out.println("City :" + nextRecord[3]);
+                out.println("Contact No :" + nextRecord[4]);
+                out.println("Mail-id :" + nextRecord[5]);
+                out.println("State :" + nextRecord[6]);
+                out.println("Zip Code :" + nextRecord[7]);
+                out.println("=============================");
             }
         } catch (Exception e){
-            System.out.println(e);
+            out.println(e);
+        }
+    }
+    public static void JsonWriter(){
+        String Data = "/home/hp/IdeaProjects/AddressBookSystemFileHandling/src/Test.json";
+        for (Map.Entry<String, ArrayList<Contacts>> addressBookMapEntry : AddressBooksystem.hashmap.entrySet()) {
+            ArrayList<Contacts> Data1 = addressBookMapEntry.getValue();
+            try (Writer writer = Files.newBufferedWriter(Paths.get(Data));
+                 JsonWriter jsonWriter = new JsonWriter(writer);) {
+                for (Contacts contacts:Data1) {
+                    Gson gson = new Gson();
+                    String jsonString = gson.toJson(contacts);
+                    jsonWriter.jsonValue(jsonString);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void JsonReader(){
+        String Data = "/home/hp/IdeaProjects/AddressBookSystemFileHandling/src/Test.json";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(Data));
+            String data;
+            while ((data = reader.readLine()) != null) {
+                System.out.println(data);
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 }
