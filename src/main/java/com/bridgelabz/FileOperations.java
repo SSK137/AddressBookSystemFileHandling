@@ -44,10 +44,10 @@ public class FileOperations {
                 String[] header = { "First Name", "Last Name", "Address","City","Contact No","Email-id","State","Zip-Code" };
                 csvWriter.writeNext(header);
                 for (Map.Entry<String, ArrayList<Contacts>> addressBookMapEntry : AddressBooksystem.hashmap.entrySet()) {
-                    ArrayList<Contacts> aa=addressBookMapEntry.getValue();
-                    for (Contacts c:aa){
-                        String[] s={c.getFirstName(), c.getLastName(),c.getAddress(),c.getCity(),c.getContactNo(),c.getEmail(),c.getState(),c.getZipCode()};
-                        csvWriter.writeNext(s);
+                    ArrayList<Contacts> Data1=addressBookMapEntry.getValue();
+                    for (Contacts contacts:Data1){
+                        String[] strings={contacts.getFirstName(), contacts.getLastName(),contacts.getAddress(),contacts.getCity(),contacts.getContactNo(),contacts.getEmail(),contacts.getState(),contacts.getZipCode()};
+                        csvWriter.writeNext(strings);
                     }
                 }
             } catch (Exception e) {
