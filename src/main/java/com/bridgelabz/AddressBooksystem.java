@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class AddressBooksystem {
     static ArrayList<String> contactsDetails = new ArrayList();
+    static ArrayList<Contacts> contactDetails = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     static HashMap<String, ArrayList<Contacts>> hashmap = new HashMap<>();
     /*Execution Of Program Starts from here*/
@@ -13,7 +14,7 @@ public class AddressBooksystem {
         System.out.println("choice");
         int choice;
         do {
-            System.out.println("\n1)Add Address Book \n2)Search Contact Details\n3)Sort By Name\n4)Sort by City adn State Name\n5) Exit");
+            System.out.println("\n1)Add Address Book \n2)Search Contact Details\n3)Sort By Name\n4)Sort by City adn State Name\n5)Read and Write Data From Text File\n6)Read and Write Data From CSV File\n7) Exit");
             choice=scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -25,7 +26,6 @@ public class AddressBooksystem {
                         System.out.println("The AddressBook already exist");
                         break;
                     } else {
-                        ArrayList<Contacts> contactDetails = new ArrayList<>();
                         addressBooksystem.MenuOption(addressBooksystem, contactDetails);
                         hashmap.put(AddressBookName, contactDetails);
                     }
@@ -43,12 +43,18 @@ public class AddressBooksystem {
                     SortByCityState(hashmap);
                     break;
                 case 5:
-                    readFromFile();
+                    FileOperations.AddtoFile();
+                    FileOperations.readFromFile();
+                    break;
+                case 6:
+                    FileOperations.CSVWriters();
+                    FileOperations.CSVReaders();
                     break;
                 default:
                     System.out.println("Wrong Choice Entered");
+                    break;
             }
-        }while (choice<6);
+        }while (choice<7);
     }
     /*----Method For Search Contact in Multiple address Books those who are belongs to Same City----*/
     public static void SearchInMultipleBook(String name){
@@ -154,7 +160,6 @@ public class AddressBooksystem {
                 System.out.println("Enetr Zip Code:");
                 info.setZipCode(scanner.next());
                 contactDetails.add(info);
-                AddtoFile(contactDetails);
             }
         }
         System.out.println("Contact details added!");
@@ -240,41 +245,13 @@ public class AddressBooksystem {
             }
         }
     }
-    private static void AddtoFile(ArrayList<Contacts> contactDetails) {
-        File file=new File("//home//hp//IdeaProjects//AddressBookSystemFileHandling//src//test.txt");
-        for (Contacts contacts:contactDetails) {
-            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-                bufferedWriter.write(contacts.getFirstName() + "\n"
-                        + contacts.getLastName() + "\n"
-                        + contacts.getAddress() + "\n"
-                        + contacts.getContactNo() + "\n"
-                        + contacts.getCity() + "\n"
-                        + contacts.getEmail() + "\n"
-                        + contacts.getState() + "\n");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
-    public static void readFromFile() {
-        File file=new File("//home//hp//IdeaProjects//AddressBookSystemFileHandling//src//test.txt");
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String st;
-            while ((st = reader.readLine()) != null) {
-                System.out.println(st);
-            }
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
     /*----Method For Menu Operations to perform----*/
     public void MenuOption(AddressBooksystem addressBooksystem,ArrayList<Contacts> contactDetails ) {
         System.out.println("Enter a number to perform action: ");
         int menu, ans;
         do {
-            System.out.println(" \n1. Add details \n2. Edit details \n3. Delete details \n4. Display details \n5.Search Contact in Perticular Book \n6)read");
+            System.out.println(" \n1. Add details \n2. Edit details \n3. Delete details \n4. Display details \n5.Search Contact in Perticular Book");
             System.out.println("Enter Option");
             menu = scanner.nextInt();
             switch (menu) {
@@ -296,9 +273,6 @@ public class AddressBooksystem {
                     break;
                 case 5:
                     SearchInSingleBook(contactDetails);
-                    break;
-                case 6:
-                    readFromFile();
                     break;
                 default:
                     System.out.println("Invalid option selected.");
