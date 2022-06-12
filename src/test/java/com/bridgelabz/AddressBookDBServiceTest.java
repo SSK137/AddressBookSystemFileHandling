@@ -14,4 +14,10 @@ public class AddressBookDBServiceTest {
         }
         Assertions.assertEquals(8,employeeData.size());
     }
+
+    @Test
+    public void givenNewContactDetail_WhenUpdated_ShouldSync() {
+        AddressBookDBService addressBookDBService=new AddressBookDBService();
+        Assertions.assertTrue(addressBookDBService.UpdateRecordInTable());
+    }
 }

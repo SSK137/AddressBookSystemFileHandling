@@ -36,4 +36,18 @@ public class AddressBookDBService {
         }
         return contactsList;
     }
+
+    public boolean UpdateRecordInTable() {
+        try(Connection conn = DBConnection.getConnection();
+            Statement statement = conn.createStatement();
+        ) {
+            String sql = "UPDATE AddressBook SET First_Name='SSK' WHERE First_Name='Saurabh'";
+            statement.executeUpdate(sql);
+            System.out.println("Record Updated Successfully...");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
