@@ -14,7 +14,7 @@ public class AddressBooksystem {
         System.out.println("choice");
         int choice;
         do {
-            System.out.println("\n1)Add Address Book \n2)Search Contact Details\n3)Sort By Name\n4)Sort by City adn State Name\n5)Read and Write Data From Text File\n6)Read and Write Data From CSV File\n7) Exit");
+            System.out.println("\n1)Add Address Book \n2)Search Contact Details\n3)Sort By Name\n4)Sort by City adn State Name\n5)Read and Write Data From Text File\n6)Read and Write Data From CSV File\n7)Read and Write Data From CSV File\n8)Exit");
             choice=scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -51,8 +51,8 @@ public class AddressBooksystem {
                     FileOperations.CSVReaders();
                     break;
                 case 7:
-                    FileOperations.JsonWriter();
-                    FileOperations.JsonReader();
+                    FileOperations.JsonWriters();
+                    FileOperations.JsonReaders();
                     break;
                 default:
                     System.out.println("Wrong Choice Entered");
@@ -137,6 +137,10 @@ public class AddressBooksystem {
             info.setContactNo(scanner.next());
             System.out.println("Enter email: ");
             info.setEmail(scanner.next());
+            System.out.println("Enter email: ");
+            info.setBookName(scanner.next());
+            System.out.println("Enter email: ");
+            info.setType(scanner.next());
             contactDetails.add(info);
         } else {
             System.out.println("Enter First Name");

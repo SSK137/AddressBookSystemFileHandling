@@ -44,22 +44,22 @@ public class FileOperations {
     //Method for CSV File Writer
     public static void CSVWriters() {
         String Data = "//home//hp//IdeaProjects//AddressBookSystemFileHandling//src//Data.csv";
-            try (Writer writer = Files.newBufferedWriter(Paths.get(Data));
-                 CSVWriter csvWriter = new CSVWriter(writer);) {
-                String[] header = { "First Name", "Last Name", "Address","City","Contact No","Email-id","State","Zip-Code" };
-                csvWriter.writeNext(header);
-                for (Map.Entry<String, ArrayList<Contacts>> addressBookMapEntry : AddressBooksystem.hashmap.entrySet()) {
-                    ArrayList<Contacts> Data1=addressBookMapEntry.getValue();
-                    for (Contacts contacts:Data1){
-                        String[] strings={contacts.getFirstName(), contacts.getLastName(),contacts.getAddress(),contacts.getCity(),contacts.getContactNo(),contacts.getEmail(),contacts.getState(),contacts.getZipCode()};
-                        csvWriter.writeNext(strings);
-                    }
+        try (Writer writer = Files.newBufferedWriter(Paths.get(Data));
+             CSVWriter csvWriter = new CSVWriter(writer);) {
+            String[] header = {"First Name", "Last Name", "Address", "City", "Contact No", "Email-id", "State", "Zip-Code"};
+            csvWriter.writeNext(header);
+            for (Map.Entry<String, ArrayList<Contacts>> addressBookMapEntry : AddressBooksystem.hashmap.entrySet()) {
+                ArrayList<Contacts> Data1 = addressBookMapEntry.getValue();
+                for (Contacts contacts : Data1) {
+                    String[] strings = {contacts.getFirstName(), contacts.getLastName(), contacts.getAddress(), contacts.getCity(), contacts.getContactNo(), contacts.getEmail(), contacts.getState(), contacts.getZipCode()};
+                    csvWriter.writeNext(strings);
                 }
-            } catch (Exception e) {
-                out.println(e);
             }
+        } catch (Exception e) {
+            out.println(e);
         }
-        //Method to Read Data From CSV File
+    }
+    //Method to Read Data From CSV File
     public static void CSVReaders(){
         String Data = "//home//hp//IdeaProjects//AddressBookSystemFileHandling//src//Data.csv";
         try (
@@ -82,7 +82,7 @@ public class FileOperations {
             out.println(e);
         }
     }
-    public static void JsonWriter(){
+    public static void JsonWriters(){
         String Data = "/home/hp/IdeaProjects/AddressBookSystemFileHandling/src/Test.json";
         for (Map.Entry<String, ArrayList<Contacts>> addressBookMapEntry : AddressBooksystem.hashmap.entrySet()) {
             ArrayList<Contacts> Data1 = addressBookMapEntry.getValue();
@@ -99,7 +99,7 @@ public class FileOperations {
         }
     }
 
-    public static void JsonReader(){
+    public static void JsonReaders(){
         String Data = "/home/hp/IdeaProjects/AddressBookSystemFileHandling/src/Test.json";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Data));
