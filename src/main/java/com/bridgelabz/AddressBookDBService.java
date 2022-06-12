@@ -1,9 +1,6 @@
 package com.bridgelabz;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,6 +73,20 @@ public class AddressBookDBService {
             }
             return true;
         } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean AddNewContact() {
+        String sql = "INSERT INTO AddressBook(First_Name,Last_Name,Phone_Number,Email,Address,City,State,Zip_Code,Book_Name,Type) VALUES\n" +
+                "          ('Siraj','Khanna',9962683843,'sk@gmail.com','Sangvi','Pune','Maharashtra',445501,'TCS','Profession')";
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
             return false;
         }
     }

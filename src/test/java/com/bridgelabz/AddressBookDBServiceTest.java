@@ -21,14 +21,18 @@ public class AddressBookDBServiceTest {
         Assertions.assertTrue(addressBookDBService.UpdateRecordInTable());
     }
     @Test
-    public void givenContactDetailRange_WhenRetrieved_ShouldMatchContact() {
+    public void givenContactDetail_WhenRetrieved_ShouldMatchContact() {
         AddressBookDBService addressBookDBService=new AddressBookDBService();
         Assertions.assertTrue(addressBookDBService.DisplayParticularData(444111,444333));
     }
     @Test
-    public void givenContactDetailRange_WhenRetrieved_ShouldMatchContactCount(){
+    public void givenContactDetail_WhenRetrieved_ShouldMatchContactCount(){
         AddressBookDBService addressBookDBService=new AddressBookDBService();
         Assertions.assertTrue(addressBookDBService.DisplayCount());
     }
-
+    @Test
+    public void givenContactDetail_WhenProper_ShouldAddToTable(){
+        AddressBookDBService addressBookDBService=new AddressBookDBService();
+        Assertions.assertTrue(addressBookDBService.AddNewContact());
+    }
 }
