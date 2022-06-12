@@ -65,4 +65,19 @@ public class AddressBookDBService {
             throw new RuntimeException(e);
         }
     }
+    public static boolean DisplayCount() {
+        try(Connection conn = DBConnection.getConnection();
+            Statement statement = conn.createStatement();
+        ) {
+            String sql = "SELECT COUNT(City) FROM AddressBook WHERE City='Pune';";
+            ResultSet resultSet =statement.executeQuery(sql);
+            while (resultSet.next()){
+                System.out.println(resultSet.getString("COUNT(City)"));
+            }
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }
