@@ -50,4 +50,19 @@ public class AddressBookDBService {
             return false;
         }
     }
+
+    public boolean DisplayParticularData(int ZipCodeStart,int ZipCodeEnd){
+        String sql = String.format(" SELECT * FROM AddressBook WHERE Zip_Code BETWEEN %s AND %s;",ZipCodeStart,ZipCodeEnd);
+        try{
+            Connection connection=DBConnection.getConnection();
+            Statement statement=connection.createStatement();
+            ResultSet resultSet=statement.executeQuery(sql);
+            while (resultSet.next()){
+                System.out.println(resultSet.getString("First_Name"));
+            }
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

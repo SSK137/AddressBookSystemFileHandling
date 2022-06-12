@@ -20,4 +20,9 @@ public class AddressBookDBServiceTest {
         AddressBookDBService addressBookDBService=new AddressBookDBService();
         Assertions.assertTrue(addressBookDBService.UpdateRecordInTable());
     }
+    @Test
+    public void givenContactDetailRange_WhenRetrieved_ShouldMatchContactCount() {
+        AddressBookDBService addressBookDBService=new AddressBookDBService();
+        Assertions.assertTrue(addressBookDBService.DisplayParticularData(444111,444333));
+    }
 }
